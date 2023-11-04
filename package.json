@@ -9,7 +9,10 @@
   "author": "Franck",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.2",
     "express": "^4.18.2",
+    "mariadb": "^3.2.2",
+    "sequelize": "^6.34.0",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
