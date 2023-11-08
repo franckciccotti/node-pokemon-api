@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isInt: { msg: 'Utilisez uniquement une URL valide pour l\'image.' },
+          isUrl: { msg: 'Utilisez uniquement une URL valide pour l\'image.' },
           notNull: { msg: 'L\'image est une propriété requise.'}
         }
       },
@@ -82,7 +82,7 @@ module.exports = (sequelize, DataTypes) => {
                 throw new Error('Un pokémon ne peut as avoir plus de trois types.')
             }
             value.split(',').forEach(type => {
-              if(!validTypes.includes(types)) {
+              if(!validTypes.includes(type)) {
                   throw new Error(`Le type d'un pokémon doit appartenir à la liste suivante : ${validTypes}`)
               }
             });
