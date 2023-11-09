@@ -1,8 +1,12 @@
 const { Pokemon } = require('../db/sequelize')
 const { Op } = require('sequelize')
-  
+const auth = require('../auth/auth')
+
 module.exports = (app) => {
-  app.get('/api/pokemons', (req, res) => {
+  
+  // 11. Sécuriser la liste des pokémons
+  app.get('/api/pokemons', auth, (req, res) => {
+  // app.get('/api/pokemons', (req, res) => {
 
     // Ajouter une fonctionnalité de recherche
     if(req.query.name) {
