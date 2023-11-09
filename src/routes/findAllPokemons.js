@@ -3,49 +3,40 @@ const { Op } = require('sequelize')
   
 module.exports = (app) => {
   app.get('/api/pokemons', (req, res) => {
-    // 03. Ajouter une fonctionnalité de recherche
+
+    // Ajouter une fonctionnalité de recherche
     if(req.query.name) {
       const name = req.query.name
-      // 10. Correction : Limiter les résultats dynamiquement
       const limit = parseInt(req.query.limit) || 5
 
-      // 12. Correction : Exécuter seulement les requêtes pertinentes
+      // Exécuter seulement les requêtes pertinentes
       if(name.length < 2) {
         const message = `le terme de recherche doit contenir aux moins 2 caractères.`
         return res.status(400).json({ message })
       }
 
-      // 07. Calculer le nombre total de résultats
-      // return Pokemon.findAll({ 
-      return Pokemon.findCountAll({ 
-          // 04. Utiliser un opérateur Sequelize
+      // Rechercher avec l’opérateur Like - Ordonner les résultats - Limiter les résultats dynamiquement
+      return Pokemon.findAndCountAll({ 
           where: { 
-            name: { // 'name' est la propriété du modèle pokémon
-              // [Op.eq]: name // 'name' est le critère de recherche
-              // 05. Rechercher avec l’opérateur Like
-              [Op.like]: `%${name}%` // 'name' est le critère de recherche
+            name: {
+              [Op.like]: `%${name}%` 
             } 
           },
-          // 08. Ordonner les résultats
           order: ['name'],
-          // 06. Limiter le nombre de résultats
-          // limit: 5
-          // 10. Correction : Limiter les résultats dynamiquement
           limit: limit
       })
-      // .then(pokemons => {
-      //   const message = `Il y a ${pokemons.length} Pokémons qui correspondent au terme de recherche ${name}.`
-      //   res.json({ message, data: pokemons })
-      // })
-      // 07. Calculer le nombre total de résultats
+
+      // Calculer le nombre total de résultats
       .then(({count, rows}) => {
           const message = `Il y a ${count} Pokémons qui correspondent au terme de recherche ${name}.`
           res.json({ message, data: rows })
       })
+
     } else {
-      // 08. Ordonner les résultats
+
+      // Ordonner les résultats
       Pokemon.findAll({ order: ['name'] })
-      // Pokemon.findAll()
+
       .then(pokemons => {
         const message = 'La liste des pokémons a bien été récupérée.'
         res.json({ message, data: pokemons })
