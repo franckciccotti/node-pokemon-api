@@ -10,7 +10,7 @@ const sequelize = new Sequelize('pokedex', 'root', 'Y$fk23J7@kLx', {
   dialectOptions: {
     timezone: 'Etc/GMT-2',
   },
-  logging: false
+  logging: true
 })
   
 const Pokemon = PokemonModel(sequelize, DataTypes)
@@ -30,19 +30,20 @@ const initDb = () => {
     })
 
     // 05. Encrypter le mot de passe
-    // bcrypt.hash('pikachu', 10)
-    // .then(hash => {
-    //   User.create({
-    //     username: 'pikachu',
-    //     password: hash
-    //   })
-    // })
+    bcrypt.hash('pikachu', 10)
+    .then(hash => 
+      User.create({
+        username: 'pikachu',
+        password: hash
+      })
+    )
 
     // 04. Sauvegarder un utilisateur sur MySQL
-    User.create({
-      username: 'pikachu',
-      password: 'pikachu'
-    })
+    // User.create({
+    //   username: 'pikachu',
+    //   password: 'pikachu'
+    // })
+    
     .then(user => console.log(user.toJSON()))
 
     console.log('La base de donnée a bien été initialisée !')

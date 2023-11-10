@@ -4,7 +4,7 @@ const auth = require('../auth/auth')
 
 module.exports = (app) => {
   
-  // 11. Sécuriser la liste des pokémons
+  // Sécuriser la liste des pokémons
   app.get('/api/pokemons', auth, (req, res) => {
   // app.get('/api/pokemons', (req, res) => {
 
@@ -39,7 +39,9 @@ module.exports = (app) => {
     } else {
 
       // Ordonner les résultats
-      Pokemon.findAll({ order: ['name'] })
+      Pokemon.findAll({ 
+        // order: ['name'] 
+      })
 
       .then(pokemons => {
         const message = 'La liste des pokémons a bien été récupérée.'
