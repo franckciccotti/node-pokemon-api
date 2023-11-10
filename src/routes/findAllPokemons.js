@@ -1,8 +1,12 @@
 const { Pokemon } = require('../db/sequelize')
 const { Op } = require('sequelize')
-  
+const auth = require('../auth/auth')
+
 module.exports = (app) => {
-  app.get('/api/pokemons', (req, res) => {
+  
+  // Sécuriser la liste des pokémons
+  app.get('/api/pokemons', auth, (req, res) => {
+  // app.get('/api/pokemons', (req, res) => {
 
     // Ajouter une fonctionnalité de recherche
     if(req.query.name) {
@@ -35,7 +39,9 @@ module.exports = (app) => {
     } else {
 
       // Ordonner les résultats
-      Pokemon.findAll({ order: ['name'] })
+      Pokemon.findAll({ 
+        // order: ['name'] 
+      })
 
       .then(pokemons => {
         const message = 'La liste des pokémons a bien été récupérée.'
