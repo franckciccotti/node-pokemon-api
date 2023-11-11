@@ -4,8 +4,8 @@
   "description": "An awesome API Rest to handle some pokemons.",
   "main": "app.js",
   "scripts": {
-    "start": "set NODE_ENV=production && node app.js",
-    "dev": "set NODE_ENV=development && nodemon app.js"
+    "start": "NODE_ENV=production node app.js",
+    "dev": "NODE_ENV=development nodemon app.js"
   },
   "author": "Franck",
   "license": "ISC",
