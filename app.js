@@ -1,18 +1,23 @@
 const express = require('express')
-const morgan = require('morgan')
 const favicon = require('serve-favicon')
 const bodyParser = require('body-parser')
 const sequelize = require('./src/db/sequelize')
 
 const app = express()
-const port = 3000
+
+// Démarrer l’API Rest sur un port dynamique
+const port = process.env.PORT || 3000
 
 app
     .use(favicon(__dirname + '/favicon.ico'))
-    .use(morgan('dev'))
     .use(bodyParser.json())
 
 sequelize.initDb()
+
+// 10. Ajouter un point de terminaison « Hello, Heroku ! » 
+app.get('/', (req, res) => {
+    res.json('Hello, Heroku !')
+})
 
 // Les points de terminaison
 require('./src/routes/findAllPokemons')(app)
