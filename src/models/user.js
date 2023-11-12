@@ -1,4 +1,4 @@
-// 02. Créer un modèle pour l’utilisateur
+// Modèle pour l’utilisateur
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('User', {
       id: {
@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       username: {
         type: DataTypes.STRING,
-        // 03. Ajouter une contrainte d’unicité
+        // Ajouter une contrainte d’unicité
         unique: {
             msg: 'Le nom est déjà pris.'
         }

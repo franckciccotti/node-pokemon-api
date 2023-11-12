@@ -3,16 +3,7 @@ const PokemonModel = require('../models/pokemon')
 const UserModel = require('../models/user')
 const pokemons = require('./mock-pokemon')
 const bcrypt = require('bcrypt')
-  
-// const sequelize = new Sequelize('pokedex', 'root', 'Y$fk23J7@kLx', {
-//   host: 'localhost',
-//   dialect: 'mariadb',
-//   dialectOptions: {
-//     timezone: 'Etc/GMT-2',
-//   },
-//   logging: false
-// })
-  
+    
 let sequelize
 
 if(process.env.NODE_ENV === 'production') {
@@ -51,7 +42,7 @@ const initDb = () => {
       }).then(pokemon => console.log(pokemon.toJSON()))
     })
 
-    // 05. Encrypter le mot de passe
+    // Encrypter le mot de passe
     bcrypt.hash('pikachu', 10)
     .then(hash => 
       User.create({
@@ -59,12 +50,6 @@ const initDb = () => {
         password: hash
       })
     )
-
-    // 04. Sauvegarder un utilisateur sur MySQL
-    // User.create({
-    //   username: 'pikachu',
-    //   password: 'pikachu'
-    // })
     
     .then(user => console.log(user.toJSON()))
 

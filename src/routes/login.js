@@ -3,13 +3,13 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const privateKey = require('../auth/private_key')
 
-// 06. Créer la route de connexion
+// Créer la route de connexion
 module.exports = (app) => {
   app.post('/api/login', (req, res) => {
   
     User.findOne({ where: { username: req.body.username } }).then(user => {
 
-        // 07. Gérer les erreurs de la connexion
+        // Gérer les erreurs de la connexion
         if(!user) {
             const message = `L'utilisateur demandé n'existe pas.`
             return res.status(404).json({ message })
@@ -21,14 +21,13 @@ module.exports = (app) => {
                 return res.status(401).json({ message })
             }
 
-            // 09. Générer un jeton JWT
+            // Générer un jeton JWT
             const token = jwt.sign(
                 { userId: user.id },
                 privateKey,
                 { expiresIn: '24h'}
             )
 
-            // 06. Créer la route de connexion
             const message = `L'utilisateur a été connecté avec succès`;
             return res.json({ message, data: user, token })
         })

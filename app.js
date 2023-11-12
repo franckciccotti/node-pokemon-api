@@ -5,7 +5,7 @@ const sequelize = require('./src/db/sequelize')
 
 const app = express()
 
-// Démarrer l’API Rest sur un port dynamique
+// Démarrage de l’API Rest sur un port dynamique
 const port = process.env.PORT || 3000
 // const port = 3000
 
@@ -15,12 +15,12 @@ app
 
 sequelize.initDb()
 
-// 10. Ajouter un point de terminaison « Hello, Heroku ! » 
+// Ajout d'un point de terminaison « Hello, Heroku ! » 
 app.get('/', (req, res) => {
     res.json('Hello, Heroku !')
 })
 
-// Les points de terminaison
+// Points de terminaison
 require('./src/routes/findAllPokemons')(app)
 require('./src/routes/findPokemonByPk')(app)
 require('./src/routes/createPokemon')(app)

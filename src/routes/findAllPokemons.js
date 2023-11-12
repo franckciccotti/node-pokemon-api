@@ -4,9 +4,7 @@ const auth = require('../auth/auth')
 
 module.exports = (app) => {
   
-  // Sécuriser la liste des pokémons
   app.get('/api/pokemons', auth, (req, res) => {
-  // app.get('/api/pokemons', (req, res) => {
 
     // Ajouter une fonctionnalité de recherche
     if(req.query.name) {
