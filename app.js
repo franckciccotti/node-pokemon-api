@@ -7,6 +7,7 @@ const app = express()
 
 // Démarrer l’API Rest sur un port dynamique
 const port = process.env.PORT || 3000
+// const port = 3000
 
 app
     .use(favicon(__dirname + '/favicon.ico'))
